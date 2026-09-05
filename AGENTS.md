@@ -96,3 +96,14 @@ If a listed command cannot run because a required tool is unavailable, report th
 Update this `AGENTS.md` only when a durable repository-wide rule has been established.
 
 Do not add temporary task notes, implementation progress, one-off decisions, or information that belongs in a skill, plugin README, issue, or commit message.
+
+## Pet artifacts
+
+- Store generated Pet projects under `pets/<pet-slug>/`, not inside a skill or plugin directory.
+- Treat Pet-generation skills as workflows and Pet directories as generated instances.
+- Preserve an existing custom Pet's stable ID when updating its name, description, or sprite sheet.
+- Never recreate an existing Pet merely to apply an update.
+- Validate and preview a changed sprite sheet before updating the registered Pet.
+- Do not commit expiring sprite-sheet URLs, upload session IDs, credentials, or account-local deployment state.
+- Do not delete a registered Pet unless the user explicitly requests deletion.
+- Keep only selected final artifacts and reproducibility information in Git; generated working files may remain in Library.
