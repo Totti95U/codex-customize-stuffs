@@ -1,0 +1,25 @@
+{
+  "ok": true,
+  "validator": "agent",
+  "manifest": {
+    "id": "toe-toe",
+    "spriteVersionNumber": 2,
+    "spritesheetPath": "spritesheet.webp"
+  },
+  "atlas": {
+    "format": "WEBP",
+    "hasAlpha": true,
+    "width": 1536,
+    "height": 2288,
+    "columns": 8,
+    "rows": 11,
+    "cellWidth": 192,
+    "cellHeight": 208
+  },
+  "visualQA": {
+    "status": "pass",
+    "note": "All rows are coherent and clean; the 16 direction cells form a continuous loop with distinct cardinal directions."
+  },
+  "errors": [],
+  "warnings": []
+}
