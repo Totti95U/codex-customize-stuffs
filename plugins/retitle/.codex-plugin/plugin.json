@@ -1,0 +1,27 @@
+{
+  "name": "retitle",
+  "version": "0.1.0",
+  "description": "Suggest memorable, concise titles for conversations using personal naming rules.",
+  "author": {
+    "name": "Personal use"
+  },
+  "keywords": [
+    "chat-titles",
+    "conversation-metadata",
+    "personal-productivity"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Retitle",
+    "shortDescription": "後で思い出せる会話タイトルを提案",
+    "longDescription": "会話の記憶の手がかり、固有名詞、活動内容を使い、後から探しやすい短いタイトルを提案します。",
+    "developerName": "Personal use",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": [
+      "この会話に合う、後で思い出しやすいタイトルを提案して。",
+      "現在のタイトルを、私の命名ルールに従って見直して。",
+      "この会話のタイトル候補を3つ、良い順に出して。"
+    ]
+  }
+}

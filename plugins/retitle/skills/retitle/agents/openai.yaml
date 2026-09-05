@@ -1,0 +1,7 @@
+interface:
+  display_name: "Retitle"
+  short_description: "会話を数か月後にも思い出せる短いタイトルを提案します"
+  default_prompt: "$retitle を使って、この会話に合うタイトルを私の命名ルールに従って提案して。"
+
+policy:
+  allow_implicit_invocation: false
