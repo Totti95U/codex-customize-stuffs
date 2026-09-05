@@ -1,0 +1,27 @@
+{
+  "name": "maintain-agents-md",
+  "version": "0.1.0",
+  "description": "Review completed repository work and maintain durable AGENTS.md guidance.",
+  "author": {
+    "name": "Personal use"
+  },
+  "repository": "https://github.com/Totti95U/codex-customize-stuffs",
+  "license": "MIT",
+  "keywords": [
+    "agents-md",
+    "repository-maintenance",
+    "codex"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Maintain AGENTS.md",
+    "shortDescription": "Capture durable repository guidance after completed work.",
+    "longDescription": "Reviews completed repository work and updates the narrowest applicable AGENTS.md only when a durable rule is justified.",
+    "developerName": "Personal use",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": [
+      "Review this completed repository task and update AGENTS.md only if a durable rule is warranted."
+    ]
+  }
+}
