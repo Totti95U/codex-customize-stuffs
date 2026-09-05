@@ -18,6 +18,9 @@
     "developerName": "Personal use",
     "category": "Productivity",
     "capabilities": [],
+    "brandColor": "#2457D6",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/logo.png",
     "defaultPrompt": [
       "この会話に合う、後で思い出しやすいタイトルを提案して。",
       "現在のタイトルを、私の命名ルールに従って見直して。",
