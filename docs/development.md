@@ -24,12 +24,27 @@ codex-customize-stuffs/
 │       │       ├── scripts/
 │       │       └── assets/
 │       └── README.md
+├── pets/
+│    └── <pet-slug>/
+│       ├── README.md
+│       ├── recipe.md
+│       ├── references/
+│       ├── package/
+│       │   ├── pet.json
+│       │   ├── spritesheet.webp
+│       │   ├── validation.json
+│       │   ├── contact-sheet.png
+│       │   └── look-directions.png
+│       ├── previews/
+│       │   └── animation.gif
+│       └── CHANGELOG.md (optional)
 ├── .agents/
 │   └── plugins/
 │       └── marketplace.json
 ├── scripts/
 │   ├── install-agents.sh
-│   └── link-skills.sh
+│   ├── link-skills.sh
+│   └── render-pet-preview.py
 └── docs/
     └── development.md
 ```
@@ -48,6 +63,18 @@ codex-customize-stuffs/
 - `plugins/<plugin-name>/skills/`
   - plugin に含める skill の原本。
   - 同じ skill の standalone 用コピーを別 directory に作らない。
+- `pets/`
+  - Pet の生成済み instance を置く。Pet-generation skill は作成・更新の workflow であり、Pet 自体の保存場所ではない。
+  - sprite sheet、manifest、validation result、preview は各 `pets/<pet-slug>/` に置き、skill や plugin に含めない。
+- `pets/<pet-slug>/`
+  - 一つの custom Pet を表す最小の管理単位。既存 Pet を更新するときは directory を作り直さず、`package/pet.json` の stable ID を維持して更新する。
+  - `README.md` には Pet の紹介、`recipe.md` には再生成に必要な character・motion・制約、`references/` には参照画像や補足資料を置く。
+- `pets/<pet-slug>/package/`
+  - 配布・登録に使う完成 bundle。`pet.json`、sprite sheet、validation result と、確認用の contact sheet・look directions をまとめる。
+- `pets/<pet-slug>/previews/`
+  - 人間が animation を確認するための生成物を置く。sprite sheet を変更したら preview も更新する。
+- `pets/<pet-slug>/references/`
+  - Pet の仕様書、長い例、補足文書。
 - `.agents/plugins/marketplace.json`
   - この repository に含まれる plugins の catalog。
 - `scripts/`
@@ -69,6 +96,43 @@ plugin 版と symbolic link 版の同じ skill を同時に有効化すると、
 
 - ChatGPT または plugin 対応 Codex：plugin を install する
 - Codex IDE extension または standalone 開発：`link-skills.sh` を使用する
+
+## Pet artifacts
+
+Pet-generation skill で作るのは workflow である。
+生成した Pet の完成品と再現に必要な情報は `pets/<pet-slug>/` に残す。
+
+- 既存 custom Pet の名前、説明、sprite sheet を更新するときも、stable ID は `package/pet.json` の `id` を引き継ぐ。
+- 登録済み Pet を削除する必要がある場合は、明示的な削除依頼を確認する。
+- sprite sheet を更新したら、validator の結果と preview を更新し、animation と look directions を目視確認する。
+- Git には完成 bundle、選択した preview、recipe、再現に必要な reference を残す。途中生成物は必要に応じて local Library に置く。
+- 期限付きの sprite-sheet URL、upload session ID、credential、account 固有の deployment state は commit しない。
+
+### Render an animation preview
+
+`scripts/render-pet-preview.py` は sprite sheet の標準 animation rows から、状態名付きの loop GIF を生成する。
+実行場所は repository root とする。
+
+初回だけ、実行する Python environment に Pillow を導入する。
+
+```bash
+python -m pip install Pillow
+```
+
+次のように、入力 sprite sheet と出力 GIF の順に渡す。
+
+```bash
+python scripts/render-pet-preview.py \
+  pets/toe-toe/package/spritesheet.webp \
+  pets/toe-toe/previews/animation.gif
+```
+
+出力先の parent directory がなければ script が作成する。
+入力は幅 1536 px、かつ v1 の高さ 1872 px または v2 の高さ 2288 px の atlas に限られる。
+生成される GIF には `idle`、`running-right`、`running-left`、`waving`、`jumping`、`failed`、`waiting`、`running`、`review` の標準 9 state を順に収録する。
+
+この preview は animation の連続性を目視確認するためのものであり、bundle の validator を置き換えない。
+sprite sheet を変更したら、validation result を確認した後で preview を再生成し、両方を更新する。
 
 ## Adding a skill
 
