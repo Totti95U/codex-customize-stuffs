@@ -20,6 +20,9 @@
     "developerName": "Personal use",
     "category": "Productivity",
     "capabilities": [],
+    "brandColor": "#2457D6",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/logo.png",
     "defaultPrompt": [
       "Review this completed repository task and update AGENTS.md only if a durable rule is warranted."
     ]
