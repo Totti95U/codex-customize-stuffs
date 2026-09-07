@@ -11,6 +11,10 @@ codex-customize-stuffs/
 │   ├── global/
 │   │   └── AGENTS.md
 │   └── presets/
+├── hooks/
+│   ├── hooks.json
+│   └── scripts/
+├── policies/
 ├── plugins/
 │   └── <plugin-name>/
 │       ├── .codex-plugin/
@@ -398,6 +402,72 @@ scripts は既存の user file を無断で削除または上書きしてはな�
 実装や運用方法が変わった場合は、関連する documentation も同じ変更内で更新する。
 
 Codex の作業中に、将来も繰り返し適用すべき repository-wide rule が判明した場合のみ、root `AGENTS.md` の更新を検討する。一度限りの作業内容や進捗記録は `AGENTS.md` に追加しない。
+
+## Runtime hooks and policies
+
+`hooks/hooks.json` と `hooks/scripts/` は runtime の正本、`policies/` は行動規則の正本とする。
+個人用の環境横断ルールなので plugin として配布せず、symbolic link で導入する。
+global AGENTS.md に policy 本文を複製する必要はない。
+
+Windows では repository root で次を実行する。
+
+```powershell
+py -3 scripts/install-hooks.py
+```
+
+macOS/Linux では次を実行する。
+
+```bash
+bash scripts/install-hooks.sh
+```
+
+Python 3.9 以上を使用する。Windows の symbolic link 作成には Developer Mode または管理者権限が必要になる。
+導入先は `CODEX_HOME`、未設定なら `~/.codex`。
+検証用には `--codex-home <temporary-directory>` を指定できる。
+実運用でこの引数を使う場合は、Codex 起動環境にも同じ `CODEX_HOME` を設定する。
+
+作成する link は次の3つ。
+
+```text
+<codex-home>/hooks.json -> <repo>/hooks/hooks.json
+<codex-home>/hooks      -> <repo>/hooks/scripts
+<codex-home>/policies   -> <repo>/policies
+```
+
+既存の file、directory、別の link は上書きしない。
+全対象を先に検査し、衝突があれば作成前に終了する。同じ link への再実行は成功する。
+作成途中に失敗した場合は、その実行が作った link だけを取り消す。
+既存 hook がある場合は内容を確認して手動統合する。自動 merge は行わない。
+runtime は自身の実体 path から repository の policy を読むため、起動 directory に依存しない。
+repository の移動で link が切れるので、clone 先を維持する。
+
+導入後は Codex の `/hooks` で設定を確認し、必要な trust review を行う。
+この script は trust 設定を変更しない。更新後も review が必要になる場合がある。
+対応する Codex と接続済み Notion tools が必要で、ChatGPT.com にはこの hook は導入されない。
+ChatGPT 用の指示が必要な場合は policy から作成し、更新時に同期する。
+
+時刻判定は毎回の UserPromptSubmit 時点で固定する。19:00〜04:59 JST は ACTIVE、05:00〜18:59 は INACTIVE。
+継続中の処理を19時に中断する timer ではない。
+正常時には prompt を block せず、Codex が探索を判定して Notion に保存し、一度断る。
+昼間も INACTIVE を注入して、同じ会話の過去の夜間状態を解除する。
+不正な event、夜間の policy 欠落・空ファイル・読み取り失敗では exit 2 で prompt を停止する。
+Python 未導入や timeout など runtime 自体の起動失敗まで防ぐ強制的な security boundary ではない。
+
+例外許可と保存済み判定は会話履歴と Notion の照合に依存する soft gate であり、hook は状態 DB を持たない。
+Notion の保存失敗時にも探索は断る。既存 project は毎回更新せず、必要な Item のみ追加する。
+
+検証は次を実行する。
+
+```bash
+python -m unittest discover -s hooks/tests -v
+python -m json.tool hooks/hooks.json
+bash -n scripts/install-hooks.sh
+```
+
+新しい Codex 会話では、夜間の新規アイデア、既定作業の完了、保存失敗、初回の例外文句、拒否後の例外、別の探索への再適用、翌朝の解除を確認する。
+自動テストは時刻境界と JSON 契約、導入時の衝突・再実行を検証する。Notion の書き込み成功やモデルの意味判定は実機で別途確認する。
+
+仕様参照: [OpenAI Hooks documentation](https://learn.chatgpt.com/docs/hooks)。
 
 ## References
 

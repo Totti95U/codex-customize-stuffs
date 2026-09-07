@@ -23,6 +23,7 @@ Read `docs/development.md` before changing the repository structure, installatio
 - Store reusable AGENTS.md templates under `agents/`.
 - Store human-facing development documentation under `docs/`.
 - Store installation and maintenance scripts under `scripts/`.
+- Store personal runtime hooks under `hooks/` and their canonical behavioral policies under `policies/`; do not duplicate policy bodies in hooks, plugins, or global instructions.
 
 Do not add new top-level directories without a clear repository-wide purpose.
 
