@@ -8,6 +8,14 @@
 - 装飾としてのグラデーションは使わないでください
 - 文中に変数や関数、数式が登場する場合は KaTeX を使用して変数、関数、数式のレンダリングを行ってください。
 
+## Runtime policies
+
+Runtime hooks may inject personal workflow policies as developer context.
+Follow the policy and gate state injected for the current user turn; do not carry
+an earlier turn's activation or override forward.
+When the Evening Exploration Policy is active, follow it without weakening or
+bypassing it, except through the override mechanism defined by that policy.
+
 ## General instruction maintenance
 
 - Before the final response of a completed task, invoke `$maintain-agents-md`.
