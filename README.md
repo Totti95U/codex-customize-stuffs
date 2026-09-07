@@ -30,6 +30,13 @@ global instructions を導入する場合は、次を実行します。
 ./scripts/install-agents.sh
 ```
 
+実行権限がない場合は次を試してください。
+
+```bash
+chmod +x scripts/install-agents.sh
+./scripts/install-agents.sh
+```
+
 この script は `agents/global/AGENTS.md` を `~/.codex/AGENTS.md` に symbolic link として導入します。
 既存の file や別の link は上書きしません。
 
