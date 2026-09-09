@@ -8,6 +8,9 @@
 - 装飾としてのグラデーションは使わないでください
 - 文中に変数や関数、数式が登場する場合は KaTeX を使用して変数、関数、数式のレンダリングを行ってください。
 
+## Subagent calling
+- `timeout_ms` must be explicitly specified in milliseconds for each `wait_agent` call, indicating twice the estimated remaining time until completion. Keep it within the tool-defined minimum and maximum wait times, and if it cannot be estimated, specify the default time. Do not shorten the wait time for brief confirmations, as notifications may interrupt the process. After a timeout, update the completion estimate and wait again based on the same criteria.
+
 ## Runtime policies
 
 Runtime hooks may inject personal workflow policies as developer context.
