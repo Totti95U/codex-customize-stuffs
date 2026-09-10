@@ -9,7 +9,15 @@
 - 文中に変数や関数、数式が登場する場合は KaTeX を使用して変数、関数、数式のレンダリングを行ってください。
 
 ## Subagent calling
-- `timeout_ms` must be explicitly specified in milliseconds for each `wait_agent` call, indicating twice the estimated remaining time until completion. Keep it within the tool-defined minimum and maximum wait times, and if it cannot be estimated, specify the default time. Do not shorten the wait time for brief confirmations, as notifications may interrupt the process. After a timeout, update the completion estimate and wait again based on the same criteria.
+
+- Use subagents only for well-scoped work that materially benefits from delegation or parallelism.
+- Do not duplicate work delegated to a subagent. While subagents are running, perform only meaningful non-overlapping work.
+- Call `wait_agent` only when the next critical-path step actually depends on a subagent result. Do not use `wait_agent` merely to poll status or obtain a brief progress confirmation.
+- Prefer one long event-driven `wait_agent` call over repeated short waits.
+- When specifying `timeout_ms`, use at least twice the estimated remaining completion time, with a minimum of 300000 ms. If the remaining time cannot be estimated reliably, omit `timeout_ms` and use the configured default.
+- A `wait_agent` timeout means only that no relevant event arrived before the deadline; it does not imply that the subagent failed. After a timeout with no state change, do not immediately poll again. Re-estimate the remaining work and wait substantially longer, preferably at least twice the previous timeout.
+- Do not shorten a wait for status checks, acknowledgements, or brief confirmations. Rely on agent completion/messages to wake an active wait.
+- Avoid unnecessary `send_message` calls to running subagents. Steer them only when new information materially changes their assigned task.
 
 ## Runtime policies
 

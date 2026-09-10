@@ -1,5 +1,9 @@
 # Global AGENTS.md Changelog
 
+## [v0.3.1] 2026-09-10
+
+- AGENTS.md の Subagent calling の制約を明確にし、`wait_agent` の時間設定をより長くするように変更
+
 ## [v0.3.0] 2026-09-09
 
 - AGENTS.md の Subagent calling セクションに `timeout_ms` の制約を追加
