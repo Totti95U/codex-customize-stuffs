@@ -8,6 +8,11 @@
 - 装飾としてのグラデーションは使わないでください
 - 文中に変数や関数、数式が登場する場合は KaTeX を使用して変数、関数、数式のレンダリングを行ってください。
 
+## Ask when unsure
+
+If you are unsure anything to related your task, you can stop and ask for clarification.
+Do not make assumptions about the task or its requirements.
+
 ## Subagent calling
 
 - Use subagents only for well-scoped work that materially benefits from delegation or parallelism.

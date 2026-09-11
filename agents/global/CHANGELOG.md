@@ -1,5 +1,9 @@
 # Global AGENTS.md Changelog
 
+## [v0.4.0] 2026-09-12
+
+- AGENTS.md に Ask when unsure セクションを追加し、タスクに関する不明点がある場合は確認するように指示
+
 ## [v0.3.1] 2026-09-10
 
 - AGENTS.md の Subagent calling の制約を明確にし、`wait_agent` の時間設定をより長くするように変更
