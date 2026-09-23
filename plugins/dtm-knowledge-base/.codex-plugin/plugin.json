@@ -1,0 +1,22 @@
+{
+  "name": "dtm-knowledge-base",
+  "version": "0.1.0",
+  "description": "Search owned DTM plugins and content by production use case, document assets, and maintain Notion relations.",
+  "author": {
+    "name": "Personal use"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "DTM Knowledge Base",
+    "shortDescription": "手持ちの音楽制作 asset を Notion から検索・整備",
+    "longDescription": "Notion の Use Case から手持ちの plugin と content を探し、明示的に依頼された asset の追加・資料化・関連付けを行います。",
+    "developerName": "Personal use",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": [
+      "キックとベースがぶつかる。手持ちの plugin なら何を使う？",
+      "この plugin を DTM Plugin Knowledge Base に追加して。",
+      "この asset を既存 Use Case に関連付けて。"
+    ]
+  }
+}

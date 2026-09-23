@@ -27,6 +27,18 @@
                 "authentication": "ON_INSTALL"
             },
             "category": "Productivity"
+        },
+        {
+            "name": "dtm-knowledge-base",
+            "source": {
+                "source": "local",
+                "path": "./plugins/dtm-knowledge-base"
+            },
+            "policy": {
+                "installation": "AVAILABLE",
+                "authentication": "ON_INSTALL"
+            },
+            "category": "Productivity"
         }
     ]
 }
