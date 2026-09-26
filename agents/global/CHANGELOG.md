@@ -1,5 +1,10 @@
 # Global AGENTS.md Changelog
 
+## [v0.5.0] 2026-09-26
+
+- AGENTS.md の General instructions セクションに rg の使用を推奨する指示を追加
+- AGENTS.md の `$maintain-agents-md` の使用を推奨する指示を General instructions セクションに移動
+
 ## [v0.4.0] 2026-09-12
 
 - AGENTS.md に Ask when unsure セクションを追加し、タスクに関する不明点がある場合は確認するように指示
