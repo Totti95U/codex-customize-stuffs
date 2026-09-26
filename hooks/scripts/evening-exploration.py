@@ -11,7 +11,7 @@ POLICY = Path(__file__).resolve().parents[2] / "policies" / "evening-exploration
 
 def build_output(now, policy_path=POLICY):
     local = now.astimezone(JST)
-    active = local.hour >= 19 or local.hour < 5
+    active = local.hour >= 23 or local.hour < 5
     context = (
         f"EVENING_EXPLORATION_GATE={'ACTIVE' if active else 'INACTIVE'}\n"
         f"Current time in Asia/Tokyo: {local.isoformat(timespec='minutes')}\n"
