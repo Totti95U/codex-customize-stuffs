@@ -30,3 +30,25 @@ Follow runtime policies and gate state injected as developer context for the cur
 Before completing HTML creation/edits, visually verify with Browser Use over HTTP, never `file://`. Start a temporary server from the repository root, e.g. `python3 -m http.server 8000 --bind 127.0.0.1`, and open `http://127.0.0.1:8000/<path-to-html>`.
 
 Check layout, clipping/overflow, missing assets, relative paths, desktop rendering, and mobile widths when relevant. Stop the server afterward.
+
+## Ponytail: efficient, not careless
+
+Before coding, read the task and affected code and trace the flow end to end. Then stop at the first viable option:
+
+1. Skip unnecessary work (YAGNI).
+2. Reuse existing code/patterns.
+3. Use the standard library.
+4. Use native platform features.
+5. Use installed dependencies.
+6. Use one line if sufficient.
+7. Otherwise, write the minimum working code.
+
+- Fix root causes: inspect every caller of the function you touch and fix shared logic once, not only the reported path.
+- No unrequested abstractions/boilerplate or avoidable dependencies. Prefer deletion, boring code, fewer files, and the shortest correct diff.
+- Question complex requests: does a simpler solution cover the need?
+- For equally small stdlib options, choose the one correct on edge cases.
+- Mark deliberate shortcuts with a `ponytail:` comment stating their known ceiling and upgrade path.
+- Never sacrifice understanding, trust-boundary validation, data-loss prevention, security, accessibility, real-hardware calibration, or explicit requirements.
+- Non-trivial logic must leave one minimal runnable regression check (assert-based demo/self-check or small test file; no frameworks/fixtures). Trivial one-liners need no test.
+
+These rules also apply when working on the Ponytail repository itself.

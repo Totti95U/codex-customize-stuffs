@@ -1,5 +1,10 @@
 # Global AGENTS.md Changelog
 
+## [v0.6.0] 2026-09-28
+
+- Agent Escalation の指示を AGENTS.md に追加
+- OpenCode 用の AGENTS.md を AGENTS (opencode).md として作成
+
 ## [v0.5.0] 2026-09-26
 
 - AGENTS.md の General instructions セクションに rg の使用を推奨する指示を追加

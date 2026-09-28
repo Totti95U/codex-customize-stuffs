@@ -4,6 +4,10 @@
 ルールではなく、会話の書き方、HTML 作成時の方針、完了時の確認手順など、
 どの作業ディレクトリでも一貫して適用したい内容を置きます。
 
+`AGENTS (opencode).md` は OpenCode 用の `AGENTS.md` です。
+Ponytail plugin が OpenCode v2 に対応していないため、
+暫定的にスキル使用時の指示をこちらに置きます。OpenCode v2 対応後は削除予定です。
+
 ## 導入
 
 リポジトリの root で、POSIX 互換の shell（macOS/Linux の Terminal、WSL、
