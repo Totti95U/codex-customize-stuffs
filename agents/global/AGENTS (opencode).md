@@ -10,6 +10,18 @@
 - Before a completed task's final response, invoke `$maintain-agents-md`.
 - Clarify uncertain task requirements with the user; do not assume.
 
+## Developing instructions
+
+This is an internal service, and since it is a project currently under development,
+we will not provide backward compatibility or data migration.
+Please always rewrite the code to ensure it is optimal and follows the KISS principle.
+Please follow the development cycle outlined below:
+
+- Update the documentation. Always follow a "documentation-first" approach in development; update the documentation first to ensure there are no inconsistencies or outdated information.
+- Write tests. Proceed using TDD.
+- Implement the minimum required functionality.
+- Perform a final check to ensure there is no unnecessary code or inconsistencies in the documentation.
+
 ## Agent workflow
 
 - The primary agent owns implementation. Delegate only well-scoped work that materially benefits; use ordinary agents for routine work. Do not duplicate delegated work; do only meaningful, non-overlapping work alongside it.

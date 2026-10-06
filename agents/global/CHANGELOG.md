@@ -1,5 +1,9 @@
 # Global AGENTS.md Changelog
 
+## [v0.7.0] 2026-10-06
+
+- ソフトウェア開発における原則を AGENTS.md に追加
+
 ## [v0.6.0] 2026-09-28
 
 - Agent Escalation の指示を AGENTS.md に追加
