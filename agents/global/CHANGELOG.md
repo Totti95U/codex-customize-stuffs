@@ -1,5 +1,10 @@
 # Global AGENTS.md Changelog
 
+## [v0.8.0] 2026-10-08
+
+- AGENTS.md にコメント内容に関する指示を追加
+- Instruction 全体を最適化
+
 ## [v0.7.0] 2026-10-06
 
 - ソフトウェア開発における原則を AGENTS.md に追加

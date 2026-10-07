@@ -12,22 +12,17 @@
 
 ## Developing instructions
 
-This is an internal service, and since it is a project currently under development,
-we will not provide backward compatibility or data migration.
-Please always rewrite the code to ensure it is optimal and follows the KISS principle.
-Please follow the development cycle outlined below:
-
-- Update the documentation. Always follow a "documentation-first" approach in development; update the documentation first to ensure there are no inconsistencies or outdated information.
-- Write tests. Proceed using TDD.
-- Implement the minimum required functionality.
-- Perform a final check to ensure there is no unnecessary code or inconsistencies in the documentation.
+- This is an internal services under development, do not provide backward compatibility or data migration.
+- Follow KISS: update documentation first, write tests (TDD), then implement only the required functionality.
+- Before finishing, remove unnecessary code and check documentation consistency.
+- 基本方針は「コードには How、テストコードには What、コミットログには Why、コードコメントには Why not」。コードコメントは、別の方法を採用しなかった理由や制約に限定し、コードの動作説明など、それ以外は書かない。
 
 ## Agent workflow
 
 - The primary agent owns implementation. Delegate only well-scoped work that materially benefits; use ordinary agents for routine work. Do not duplicate delegated work; do only meaningful, non-overlapping work alongside it.
 - Use `senior-consult` only for material mathematical/specification ambiguity, conflicting evidence, hard-to-reverse architecture, hidden invariant/API/data risks, or two serious failures without a root cause—not difficulty alone.
 - Provide the question, assumptions, relevant files/symbols, evidence, alternatives, and attempts. Request analysis, not implementation; consult once per decision unless substantial new evidence appears.
-- If uncertainty remains, ask the user with stakes, evidence, alternatives, consultant conclusions, and references. Pause only dependent work; do not guess.
+- If uncertainty remains, ask the user with stakes, evidence, alternatives, consultant conclusions, and references. Pause only dependent work.
 - Use `wait_agent` only when the next critical-path step depends on its result, never for status polling. Prefer one long, event-driven wait; rely on completion/messages to wake it.
 - Set `timeout_ms` to at least twice the estimated remaining time and at least 300000 ms; omit it if the estimate is unreliable.
 - A timeout means no event, not failure. If state is unchanged, re-estimate and wait substantially longer (preferably ≥2× the previous timeout); do not immediately poll or shorten waits for acknowledgements/status.
@@ -49,18 +44,13 @@ Before coding, read the task and affected code and trace the flow end to end. Th
 
 1. Skip unnecessary work (YAGNI).
 2. Reuse existing code/patterns.
-3. Use the standard library.
+3. Use the standard library; among equally small options, choose the one correct on edge cases.
 4. Use native platform features.
 5. Use installed dependencies.
-6. Use one line if sufficient.
-7. Otherwise, write the minimum working code.
+6. Otherwise, write the minimum working code; one line if sufficient.
 
 - Fix root causes: inspect every caller of the function you touch and fix shared logic once, not only the reported path.
-- No unrequested abstractions/boilerplate or avoidable dependencies. Prefer deletion, boring code, fewer files, and the shortest correct diff.
-- Question complex requests: does a simpler solution cover the need?
-- For equally small stdlib options, choose the one correct on edge cases.
-- Mark deliberate shortcuts with a `ponytail:` comment stating their known ceiling and upgrade path.
+- No unrequested abstractions/boilerplate or avoidable dependencies. Prefer deletion, fewer files, and the shortest correct diff.
+- Mark deliberate shortcuts with a `ponytail:` comment explaining why a more complete solution is not used, including the known ceiling and upgrade conditions.
 - Never sacrifice understanding, trust-boundary validation, data-loss prevention, security, accessibility, real-hardware calibration, or explicit requirements.
 - Non-trivial logic must leave one minimal runnable regression check (assert-based demo/self-check or small test file; no frameworks/fixtures). Trivial one-liners need no test.
-
-These rules also apply when working on the Ponytail repository itself.
