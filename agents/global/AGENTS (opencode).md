@@ -5,7 +5,7 @@
 - ページデザインは Minimalism。背景はライトモードで白系の無彩色（#fafafa）、ダークモードで黒系（#101010）。装飾グラデーションは禁止。
 - 文中の変数・関数・数式は KaTeX でレンダリングする。
 - Before a completed task's final response, invoke `$maintain-agents-md`.
-- 最終応答によるユーザーへの報告は日本語で行ってください。
+- ユーザーへの質問や最終応答によるユーザーへの報告などは日本語で行ってください。
 - Clarify uncertain task requirements with the user; do not assume.
 
 ## Developing instructions

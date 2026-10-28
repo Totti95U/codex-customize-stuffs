@@ -1,6 +1,10 @@
 # Global AGENTS.md Changelog
 
-## [v0.9.0] 2026-10-10
+## [v0.9.1] 2026-10-28
+
+- AGENTS.md の General instructions セクションに、タスクの不明点をユーザーに確認するように指示を追加
+
+## [v0.9.0] 2026-10-28
 - AGENTS.md の General instructions セクションに、日本語で報告をするように指示を追加
     - Claude, DeepSeek系エージェントが英語で報告することが多いため
 - AGENTS.md の Developing instructions セクションに、ドキュメントとコードの不一致がある場合は、既存コードの慣習に従うように指示を追加
