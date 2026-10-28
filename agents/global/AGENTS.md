@@ -1,13 +1,11 @@
 # AGENTS.md
 
-## チャット時の指示
-
-- ページデザインは Minimalism。背景はライトモードで白系の無彩色（#ffffff）、ダークモードで黒系（#333333 / #1c1c1c）。装飾グラデーションは禁止。
-- 文中の変数・関数・数式は KaTeX でレンダリングする。
-
 ## General instructions
 
+- ページデザインは Minimalism。背景はライトモードで白系の無彩色（#fafafa）、ダークモードで黒系（#101010）。装飾グラデーションは禁止。
+- 文中の変数・関数・数式は KaTeX でレンダリングする。
 - Before a completed task's final response, invoke `$maintain-agents-md`.
+- 最終応答によるユーザーへの報告は日本語で行ってください。
 - Clarify uncertain task requirements with the user; do not assume.
 
 ## Developing instructions
@@ -16,6 +14,7 @@
 - Follow KISS: update documentation first, write tests (TDD), then implement only the required functionality.
 - Before finishing, remove unnecessary code and check documentation consistency.
 - 基本方針は「コードには How、テストコードには What、コミットログには Why、コードコメントには Why not」。コードコメントは、別の方法を採用しなかった理由や制約に限定し、コードの動作説明など、それ以外は書かない。
+- When a repository's documentation and its existing code disagree, follow the conventions used in the existing code, and in your final reply point out each inconsistency you found between the documentation and the code.
 
 ## Agent workflow
 
@@ -27,10 +26,6 @@
 - Set `timeout_ms` to at least twice the estimated remaining time and at least 300000 ms; omit it if the estimate is unreliable.
 - A timeout means no event, not failure. If state is unchanged, re-estimate and wait substantially longer (preferably ≥2× the previous timeout); do not immediately poll or shorten waits for acknowledgements/status.
 - Send messages to running subagents only when new information materially changes their task.
-
-## Runtime policies
-
-Follow runtime policies and gate state injected as developer context for the current turn; never carry prior activation or overrides forward. When Evening Exploration is active, do not weaken or bypass it except through its defined override mechanism.
 
 ## HTML visual verification
 

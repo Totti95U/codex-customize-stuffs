@@ -1,5 +1,12 @@
 # Global AGENTS.md Changelog
 
+## [v0.9.0] 2026-10-10
+- AGENTS.md の General instructions セクションに、日本語で報告をするように指示を追加
+    - Claude, DeepSeek系エージェントが英語で報告することが多いため
+- AGENTS.md の Developing instructions セクションに、ドキュメントとコードの不一致がある場合は、既存コードの慣習に従うように指示を追加
+    - AGENTS.mdの記述が今のコードと食い違っていると、9割がた古い記述のほうに従ってしまうらしいので [ソース](https://arxiv.org/abs/2610.30571)
+- チャット時の指示を General instructions に統合
+
 ## [v0.8.0] 2026-10-08
 
 - AGENTS.md にコメント内容に関する指示を追加
