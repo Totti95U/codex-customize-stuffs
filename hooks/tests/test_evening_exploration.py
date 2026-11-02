@@ -25,7 +25,7 @@ installer = module("installer", ROOT / "scripts/install-hooks.py")
 
 class GateTests(unittest.TestCase):
     def test_boundaries(self):
-        for hour, minute, active in [(18, 59, False), (19, 0, True),
+        for hour, minute, active in [(21, 29, False), (21, 30, True),
                                      (23, 59, True), (0, 0, True),
                                      (4, 59, True), (5, 0, False)]:
             with self.subTest(hour=hour, minute=minute):
@@ -36,7 +36,7 @@ class GateTests(unittest.TestCase):
                 self.assertNotIn("decision", output)
 
     def test_timezone_and_missing_policy(self):
-        now = datetime(2026, 9, 7, 10, tzinfo=timezone.utc)
+        now = datetime(2026, 9, 7, 14, tzinfo=timezone.utc)
         self.assertIn("GATE=ACTIVE", str(gate.build_output(now)))
         with self.assertRaises(FileNotFoundError):
             gate.build_output(now, ROOT / "missing-policy.md")

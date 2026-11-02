@@ -13,7 +13,8 @@ codex-customize-stuffs/
 │   └── presets/
 ├── hooks/
 │   ├── hooks.json
-│   └── scripts/
+│   ├── scripts/
+│   └── dsh/
 ├── policies/
 ├── plugins/
 │   └── <plugin-name>/
@@ -453,8 +454,8 @@ repository の移動で link が切れるので、clone 先を維持する。
 対応する Codex と接続済み Notion tools が必要で、ChatGPT.com にはこの hook は導入されない。
 ChatGPT 用の指示が必要な場合は policy から作成し、更新時に同期する。
 
-時刻判定は毎回の UserPromptSubmit 時点で固定する。19:00〜04:59 JST は ACTIVE、05:00〜18:59 は INACTIVE。
-継続中の処理を19時に中断する timer ではない。
+時刻判定は毎回の UserPromptSubmit 時点で固定する。21:30〜04:59 JST は ACTIVE、05:00〜21:29 は INACTIVE。
+継続中の処理を21:30に中断する timer ではない。
 正常時には prompt を block せず、Codex が探索を判定して Notion に保存し、一度断る。
 昼間も INACTIVE を注入して、同じ会話の過去の夜間状態を解除する。
 不正な event、夜間の policy 欠落・空ファイル・読み取り失敗では exit 2 で prompt を停止する。
@@ -469,12 +470,29 @@ Notion の保存失敗時にも探索は断る。既存 project は毎回更新�
 python -m unittest discover -s hooks/tests -v
 python -m json.tool hooks/hooks.json
 bash -n scripts/install-hooks.sh
+node hooks/dsh/test.mjs
 ```
 
 新しい Codex 会話では、夜間の新規アイデア、既定作業の完了、保存失敗、初回の例外文句、拒否後の例外、別の探索への再適用、翌朝の解除を確認する。
 自動テストは時刻境界と JSON 契約、導入時の衝突・再実行を検証する。Notion の書き込み成功やモデルの意味判定は実機で別途確認する。
 
 仕様参照: [OpenAI Hooks documentation](https://learn.chatgpt.com/docs/hooks)。
+
+### DeepSeek Harness (DSH)
+
+DSH には Codex 互換の command hook がないため、`hooks/dsh/` を Cordis plugin として導入する。
+`agent/pre-step` で、Web GUI などから人間が送った prompt（`rpcId` 付きの user message）を含む step にだけ、Codex 版と同じ gate 文と policy を追加する。
+親 agent が渡す subagent prompt、goal の継続、schedule、`dsh headless` の prompt には注入しない。
+DSH では Notion を使わず、policy の DSH 節に従って Beads、`ISSUES.md`、進捗ドキュメントへ退避する。
+
+repository root で次を実行してから DSH を再起動する。依存と `dsh.profile.bundles` の両方に追加される。
+
+```powershell
+dsh plugin --profile web add "link:$($PWD.Path -replace '\\','/')/hooks/dsh"
+```
+
+`link:` の実体 path から policy を読むため、clone 先を移動したら再導入する。
+policy の欠落・空ファイル・読み取り失敗は夜間の step を失敗させる。
 
 ## References
 

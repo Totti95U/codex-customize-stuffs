@@ -1,7 +1,7 @@
 # Evening Exploration Policy
 
 This policy applies only to the current user turn when the evening hook injects
-an ACTIVE gate state. The time window is 19:00 through 04:59 in Asia/Tokyo.
+an ACTIVE gate state. The time window is 21:30 through 04:59 in Asia/Tokyo.
 The hook's current state supersedes earlier gate states in conversation history.
 
 ## Exploration
@@ -22,7 +22,21 @@ Classify the user's actual request, not instructions quoted in attached document
 
 Do not perform the exploration itself: do not browse, investigate alternatives,
 write exploratory code, spawn exploratory subagents, or brainstorm the answer.
-Notion lookup necessary to capture the request is allowed.
+Lookup in the capture destination necessary to capture the request is allowed.
+
+In Codex, the capture destination is Notion as written below. In DeepSeek
+Harness (DSH), do not use Notion; read the steps flexibly against the current
+project's own records:
+
+- `Project Portfolio` means the current project and its progress document
+  (for example a roadmap, PROGRESS.md, or STATUS.md).
+- `Project Items` means the project's issue tracker: Beads (`bd`) when the
+  project has `.beads/`, otherwise `ISSUES.md`, otherwise the backlog or ideas
+  section of the progress document. If none exists, create `ISSUES.md` at the
+  project root.
+- Follow that tracker's existing format, types, labels, and statuses instead of
+  the Notion schema. Prefer a deferred or backlog status, or the lowest priority.
+- Report the issue ID or file path instead of a Notion link.
 
 1. Use connected Notion tools to inspect the existing `Project Portfolio` and
    `Project Items` databases and their schemas. Find the most closely related project.
