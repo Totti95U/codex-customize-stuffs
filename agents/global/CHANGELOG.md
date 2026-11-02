@@ -1,5 +1,9 @@
 # Global AGENTS.md Changelog
 
+## [v0.10.0] 2026-11-02
+
+- AGENTS.md にグラフィカルデザインはデジタル庁デザインシステム（DADS）に準拠するように指示を追加
+
 ## [v0.9.1] 2026-10-28
 
 - AGENTS.md の General instructions セクションに、タスクの不明点をユーザーに確認するように指示を追加
