@@ -47,7 +47,8 @@ codex-customize-stuffs/
 │       └── marketplace.json
 ├── scripts/
 │   ├── install-agents.sh
-│   ├── link-skills.sh
+│   ├── test-install-agents.sh
+│   ├── link-skill.sh
 │   └── render-pet-preview.py
 └── docs/
     └── development.md
@@ -94,12 +95,12 @@ plugins/<plugin-name>/skills/<skill-name>/
 
 standalone skill として使用するためだけに、同じ `SKILL.md` を別の directory へコピーしてはならない。
 
-Codex CLI や IDE extension で standalone skill が必要な場合は、`scripts/link-skills.sh` を使って plugin 内の skill directory への symbolic link を作成する。
+Codex CLI や IDE extension で standalone skill が必要な場合は、`scripts/link-skill.sh` を使って plugin 内の skill directory への symbolic link を作成する。
 
 plugin 版と symbolic link 版の同じ skill を同時に有効化すると、同名 skill が重複して表示される可能性がある。通常は次のいずれか一方を使用する。
 
 - ChatGPT または plugin 対応 Codex：plugin を install する
-- Codex IDE extension または standalone 開発：`link-skills.sh` を使用する
+- Codex IDE extension または standalone 開発：`link-skill.sh` を使用する
 
 ## Pet artifacts
 
@@ -262,14 +263,20 @@ cd codex-customize-stuffs
     -> agents/global/AGENTS.md
 ```
 
-既存の `~/.codex/AGENTS.md` がある場合、script は上書きせず終了する。既存内容を確認し、手動で統合または退避してから再実行する。
+Windows 11（Git Bash の `uname -s` が返す NT build が 22000 以上）では、同じ link を `~/.dsh/AGENTS.md` にも作成する。
+
+- 既存の `~/.codex/AGENTS.md` がある場合、script は上書きせず終了する。既存内容を確認し、手動で統合または退避してから再実行する。
+- 既存の `~/.dsh/AGENTS.md` は `~/.dsh/AGENTS.md.bak` に退避してから置き換える。`.bak` が既にある場合は日時付きの名前を使う。
+- 原本と同一内容の file が既に配置されている場合（Git Bash の `ln -s` が実体コピーになる環境など）は、何も変更しない。
+
+回帰確認は `./scripts/test-install-agents.sh` で行う。
 
 repository を移動または削除すると symbolic link が切れるため、clone 先は安定した場所にする。
 
 ### Link standalone skills
 
 ```bash
-./scripts/link-skills.sh
+./scripts/link-skill.sh
 ```
 
 この script は、次の pattern に一致するすべての skill を検出する。
