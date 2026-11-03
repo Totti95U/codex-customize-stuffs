@@ -31,6 +31,10 @@
 - A timeout means no event, not failure. If state is unchanged, re-estimate and wait substantially longer (preferably ≥2× the previous timeout); do not immediately poll or shorten waits for acknowledgements/status.
 - Send messages to running subagents only when new information materially changes their task.
 
+## 既知の環境問題
+
+- `agentsview sync` が `unsupported required event type "job/registered"` で終了コード 1 になるのは既知のバージョン不整合（agentsview v0.46.1 が DSH の `job/registered` / `job/settled` を未対応）。環境破損ではないので原因調査をやり直さないこと。他ソースと該当イベントを含まない DSH セッションは正常に同期されるため、`agentsview update --check --force` で更新が出るまで放置し、`disabled_agents` の変更や `~/.dsh/sessions` のログ改変で回避しない。
+
 ## HTML visual verification
 
 Before completing HTML creation/edits, visually verify with Browser Use over HTTP, never `file://`. Start a temporary server from the repository root, e.g. `python3 -m http.server 8000 --bind 127.0.0.1`, and open `http://127.0.0.1:8000/<path-to-html>`.
