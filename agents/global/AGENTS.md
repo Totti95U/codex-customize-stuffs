@@ -19,6 +19,7 @@
 - Before finishing, remove unnecessary code and check documentation consistency.
 - 基本方針は「コードには How、テストコードには What、コミットログには Why、コードコメントには Why not」。コードコメントは、別の方法を採用しなかった理由や制約に限定し、コードの動作説明など、それ以外は書かない。
 - When a repository's documentation and its existing code disagree, follow the conventions used in the existing code, and in your final reply point out each inconsistency you found between the documentation and the code.
+- Avoid unnecessary secondary labels and descriptions. Let the layout do the explaining.
 
 ## Agent workflow
 
