@@ -11,6 +11,7 @@
 - Before a completed task's final response, invoke `$maintain-agents-md`.
 - ユーザーへの質問や最終応答によるユーザーへの報告などは日本語で行ってください。
 - Clarify uncertain task requirements with the user; do not assume.
+- ユーザーが提示した方法よりも効率的・効果的な方法がある場合は遠慮なくユーザーに提案してください。
 
 ## Developing instructions
 
