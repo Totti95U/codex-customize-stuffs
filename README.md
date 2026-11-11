@@ -11,6 +11,7 @@ global `AGENTS.md`、project 向けの preset、skills-only plugin、custom Pet 
 - [Retitle](plugins/retitle/README.md)：後から探しやすい会話タイトルを提案する plugin です。
 - [Maintain AGENTS.md](plugins/maintain-agents-md/README.md)：完了した repository task から、将来も有効な `AGENTS.md` の規約だけを見直す plugin です。
 - [DTM Knowledge Base](plugins/dtm-knowledge-base/README.md)：DTM の知識、特に所持プラグインに関するデータベースを管理・参照する plugin です。
+- [Quiz Gate](plugins/quiz-gate/README.md)：作業内容の briefing と quiz で理解を確認し、正答するまで commit や完了を止める plugin です。
 - [トテトテ](pets/toe-toe/README.md)：この repository で管理する custom Pet です。
 
 skills の正本は各 plugin の `skills/<skill-name>/` です。

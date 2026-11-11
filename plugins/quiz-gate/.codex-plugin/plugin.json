@@ -1,0 +1,17 @@
+{
+  "name": "quiz-gate",
+  "version": "0.1.0",
+  "description": "Comprehension gate that briefs the user on agent work, quizzes them, and blocks commit, merge, phase completion, or goal completion until they pass.",
+  "author": {
+    "name": "Personal use"
+  },
+  "repository": "https://github.com/Totti95U/codex-customize-stuffs",
+  "license": "MIT",
+  "keywords": [
+    "comprehension",
+    "review-gate",
+    "quiz",
+    "codex"
+  ],
+  "skills": "./skills/"
+}
